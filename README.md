@@ -14,3 +14,9 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 * dist - 打包后的代码
 * doc - 文档
 
+## 打包发布
+``` shell
+pip install pyinstaller
+pyinstaller -F src/app.py
+```
+
