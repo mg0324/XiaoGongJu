@@ -1,6 +1,12 @@
 # XiaoGongJu
 小工具积累
 
+## 环境安装
+安装`python3.6`后执行安装依赖命令。
+``` shell
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
 ## 架构设计
 
 ## 目录结构
