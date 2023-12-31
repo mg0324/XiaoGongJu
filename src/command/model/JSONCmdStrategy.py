@@ -15,7 +15,6 @@ class JSONCmdStrategy(CmdStrategy):
         # 格式化json
         file = app.argument.get_args().file
         if file:
-            data = ""
             with open(file, 'r') as f:
                 data = f.read()
             # json格式化
