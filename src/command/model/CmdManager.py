@@ -5,6 +5,7 @@
 # @Time   : 2023/12/31 11:53
 # @Author : mango
 from src.command.config.CmdEnum import CmdEnum
+from src.command.model.JSONCmdStrategy import JSONCmdStrategy
 from src.command.model.RoundCmdStrategy import RoundCmdStrategy
 
 
@@ -12,7 +13,8 @@ from src.command.model.RoundCmdStrategy import RoundCmdStrategy
 class CmdManager:
     # 类型实现
     __impl = {
-        CmdEnum.ROUND.value: RoundCmdStrategy()
+        CmdEnum.ROUND.value: RoundCmdStrategy(),
+        CmdEnum.JSON.value: JSONCmdStrategy()
     }
 
     @staticmethod

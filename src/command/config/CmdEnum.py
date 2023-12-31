@@ -9,4 +9,5 @@ from enum import Enum
 
 class CmdEnum(Enum):
     ROUND = "round"
+    JSON = "json"
 
