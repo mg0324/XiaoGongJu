@@ -8,9 +8,17 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 ## 架构设计
+利用4+1视图展现，主要关注用例图和类图。
+![](./doc/res/4+1.drawio.png)
+### 用例图
+![](./doc/res/use-case.png)
+### 逻辑图
+![](./doc/res/logical-view.png)
 
 ## 目录结构
 * src - 项目源码
+  * wxPython - 利用wxPython构建界面系统
+  * command - 利用command框架来实现命令行
 * dist - 打包后的代码
 * doc - 文档
 
