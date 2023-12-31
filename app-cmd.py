@@ -31,7 +31,7 @@ class App:
     @showtime(stage="主工作")
     def run(self):
         if len(sys.argv) == 1:
-            self.argument.get_parser().print_usage()
+            self.argument.get_parser().print_help()
         elif len(sys.argv) > 1:
             # 根据子命令分流执行 找到子命令
             cmdName = self.find_sub_cmd()
@@ -56,4 +56,5 @@ class App:
 
 if __name__ == '__main__':
     app = App("XiaoGongJu")
+    #sys.argv = ['app-cmd.py', 'round']
     app.run()
