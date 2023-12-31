@@ -4,7 +4,7 @@
 # @File   : RoundCmdStrategy
 # @Time   : 2023/12/31 13:54
 # @Author : mango
-from command.model.CmdStrategy import CmdStrategy
+from src.command.model.CmdStrategy import CmdStrategy
 
 
 class RoundCmdStrategy(CmdStrategy):

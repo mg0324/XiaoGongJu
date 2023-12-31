@@ -6,7 +6,7 @@
 # @Author : mango
 
 import argparse
-from command.model.CmdManager import CmdManager
+from src.command.model.CmdManager import CmdManager
 
 
 # 命令行参数类
@@ -41,7 +41,7 @@ class Argument:
     def __init__(self, name):
         self.__name = name
         description = "欢迎使用 " + self.get_version()
-        usage = "python3 app.py [cmd]"
+        usage = "python3 app-cmd.py [cmd]"
         parser = argparse.ArgumentParser(usage=usage,
                                          prog=self.__name,
                                          description=description,

@@ -21,6 +21,7 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 * src - 项目源码
   * wxPython - 利用wxPython构建界面系统
   * command - 利用command框架来实现命令行
+* app-cmd.py - 执行
 * dist - 打包后的代码
 * doc - 文档
 

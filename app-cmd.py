@@ -5,11 +5,11 @@
 # @Time   : 2023/12/31 11:01
 # @Author : mango
 import sys
-from command.util.LogUtil import LogUtil
-from command.config.Config import Config
-from command.util.showtime import showtime
-from command.view.Argument import Argument
-from command.model.CmdManager import CmdManager
+from src.command.util.LogUtil import LogUtil
+from src.command.config.Config import Config
+from src.command.util.showtime import showtime
+from src.command.view.Argument import Argument
+from src.command.model.CmdManager import CmdManager
 
 
 class App:
@@ -56,5 +56,5 @@ class App:
 
 if __name__ == '__main__':
     app = App("XiaoGongJu")
-    sys.argv = ['app.py', 'round']
+    sys.argv = ['app-cmd.py', 'round']
     app.run()

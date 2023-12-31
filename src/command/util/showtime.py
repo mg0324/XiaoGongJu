@@ -8,7 +8,7 @@
 
 import time
 from functools import wraps
-from command.util.LogUtil import LogUtil
+from src.command.util.LogUtil import LogUtil
 
 
 # 装饰器注解getTime
