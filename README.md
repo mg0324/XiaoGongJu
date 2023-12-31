@@ -14,6 +14,8 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ![](./doc/res/use-case.png)
 ### 逻辑图
 ![](./doc/res/logical-view.png)
+### 组件图
+![](./doc/res/compontent.png)
 
 ## 目录结构
 * src - 项目源码
