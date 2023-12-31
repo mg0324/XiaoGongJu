@@ -28,6 +28,6 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ## 打包发布
 ``` shell
 pip install pyinstaller
-pyinstaller -F src/app.py
+pyinstaller -F app-cmd.py
 ```
 

@@ -56,5 +56,4 @@ class App:
 
 if __name__ == '__main__':
     app = App("XiaoGongJu")
-    sys.argv = ['app-cmd.py', 'round']
     app.run()
