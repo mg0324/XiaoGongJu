@@ -1,9 +1,11 @@
+
 import wx
 
 
-class MainFrame(wx.Frame):
+class Example(wx.Frame):
+
     def __init__(self, *args, **kwargs):
-        super(MainFrame, self).__init__(*args, **kwargs)
+        super(Example, self).__init__(*args, **kwargs)
 
         self.InitUI()
 
@@ -18,21 +20,9 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.OnQuit, fileItem)
 
         self.SetSize((300, 200))
-        self.SetTitle('XiaoGongJu')
+        self.SetTitle('Simple menu')
         self.Centre()
 
     def OnQuit(self, e):
         self.Close()
-
-
-def main():
-
-    app = wx.App()
-    ex = MainFrame()
-    ex.Show()
-    app.MainLoop()
-
-
-if __name__ == '__main__':
-    main()
 

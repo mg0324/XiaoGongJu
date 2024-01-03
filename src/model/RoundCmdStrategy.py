@@ -4,8 +4,8 @@
 # @File   : RoundCmdStrategy
 # @Time   : 2023/12/31 13:54
 # @Author : mango
-from src.command.config.CmdTypeEnum import CmdTypeEnum
-from src.command.model.CmdStrategy import CmdStrategy
+from src.config.CmdTypeEnum import CmdTypeEnum
+from src.model.CmdStrategy import CmdStrategy
 
 
 class RoundCmdStrategy(CmdStrategy):

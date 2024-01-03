@@ -5,11 +5,11 @@
 # @Time   : 2023/12/31 11:01
 # @Author : mango
 import sys
-from src.command.util.LogUtil import LogUtil
-from src.command.config.Config import Config
-from src.command.util.showtime import showtime
-from src.command.view.Argument import Argument
-from src.command.model.CmdManager import CmdManager
+from src.util.LogUtil import LogUtil
+from src.config.Config import Config
+from src.util.showtime import showtime
+from src.view.Argument import Argument
+from src.model.CmdManager import CmdManager
 
 
 class App:

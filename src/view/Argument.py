@@ -6,7 +6,7 @@
 # @Author : mango
 
 import argparse
-from src.command.model.CmdManager import CmdManager
+from src.model.CmdManager import CmdManager
 
 
 # 命令行参数类
