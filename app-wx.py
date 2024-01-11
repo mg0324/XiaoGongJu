@@ -6,16 +6,16 @@
 # @Author : mango
 import wx
 
-from src.view.app import Example
+from src.view.Frame import Frame
 
 
 def main():
-
     app = wx.App()
-    ex = Example(None)
+    ex = Frame(None)
     ex.Show()
     app.MainLoop()
 
 
 if __name__ == '__main__':
     main()
+
