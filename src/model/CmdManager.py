@@ -13,8 +13,8 @@ from src.model.RoundCmdStrategy import RoundCmdStrategy
 class CmdManager:
     # 类型实现
     __impl = {
-        CmdEnum.ROUND.value: RoundCmdStrategy(),
-        CmdEnum.JSON.value: JSONCmdStrategy()
+        CmdEnum.ROUND.value.get("value"): RoundCmdStrategy(),
+        CmdEnum.JSON.value.get("value"): JSONCmdStrategy()
     }
 
     @staticmethod

@@ -8,6 +8,19 @@ from enum import Enum
 
 
 class CmdEnum(Enum):
-    ROUND = "round"
-    JSON = "json"
+    ROUND = {
+        "value": "round",
+        "desc": "切面命令，在字符串前后可以新增自定义内容。"
+    }
+    JSON = {
+        "value": "json",
+        "desc": "json格式化命令，可以将字符串格式化为json格式。"
+    }
+
+    @staticmethod
+    def getItemByValue(value):
+        for item in CmdEnum:
+            if item.value.get("value") == value:
+                return item
+        return ""
 

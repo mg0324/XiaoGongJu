@@ -1,101 +1,107 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""
-ZetCode wxPython tutorial
-
-In this example, we manually create
-a menu item.
-
-author: Jan Bodnar
-website: www.zetcode.com
-last modified: April 2018
-"""
+###########################################################################
+## Python code generated with wxFormBuilder (version 4.0.0-0-g0efcecf)
+## http://www.wxformbuilder.org/
+##
+## PLEASE DO *NOT* EDIT THIS FILE!
+###########################################################################
 
 import wx
+import wx.xrc
+import wx.aui
 
-APP_EXIT = 1
+from src.config.CmdEnum import CmdEnum
+from src.view.JSONPanel import JSONPanel
+from src.view.RoundPanel import RoundPanel
 
+
+###########################################################################
+## Class Frame
+###########################################################################
 
 class Frame(wx.Frame):
 
-    def __init__(self, *args, **kwargs):
-        super(Frame, self).__init__(*args, **kwargs)
+    def __init__(self, parent):
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"小工具", pos=wx.DefaultPosition, size=wx.Size(1000, 700),
+                          style=wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX | wx.TAB_TRAVERSAL)
 
-        self.InitUI()
+        self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
 
-    def InitUI(self):
-        menubar = wx.MenuBar()
-        fileMenu = wx.Menu()
-        qmi = wx.MenuItem(fileMenu, APP_EXIT, '&退出\tCtrl+Q')
-        # qmi.SetBitmap(wx.Bitmap('exit.png'))
-        fileMenu.Append(qmi)
+        self.menuBar = wx.MenuBar(0)
+        self.menuFile = wx.Menu()
+        self.m_menuItem1 = wx.MenuItem(self.menuFile, wx.ID_ANY, u"退出", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menuFile.Append(self.m_menuItem1)
 
-        self.Bind(wx.EVT_MENU, self.OnQuit, id=APP_EXIT)
+        self.menuBar.Append(self.menuFile, u"文件")
 
-        menubar.Append(fileMenu, '&文件')
-        self.SetMenuBar(menubar)
+        self.menuAbout = wx.Menu()
+        self.menuBar.Append(self.menuAbout, u"关于")
 
-        self.SetSize((1000, 700))
-        self.SetTitle('小工具')
-        self.Centre()
+        self.SetMenuBar(self.menuBar)
 
-        panel = wx.Panel(self)
+        bSizer3 = wx.BoxSizer(wx.VERTICAL)
 
-        font = wx.SystemSettings.GetFont(wx.SYS_SYSTEM_FONT)
+        bSizer10 = wx.BoxSizer(wx.HORIZONTAL)
 
-        font.SetPointSize(9)
+        bSizer5 = wx.BoxSizer(wx.VERTICAL)
 
-        vbox = wx.BoxSizer(wx.VERTICAL)
+        bSizer6 = wx.BoxSizer(wx.HORIZONTAL)
 
-        hbox1 = wx.BoxSizer(wx.HORIZONTAL)
-        st1 = wx.StaticText(panel, label='Class Name')
-        st1.SetFont(font)
-        hbox1.Add(st1, flag=wx.RIGHT, border=8)
-        tc = wx.TextCtrl(panel)
-        hbox1.Add(tc, proportion=1)
-        vbox.Add(hbox1, flag=wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP, border=10)
+        self.m_staticText20 = wx.StaticText(self, wx.ID_ANY, u"命令", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText20.Wrap(-1)
 
-        vbox.Add((-1, 10))
+        bSizer6.Add(self.m_staticText20, 0, wx.ALIGN_CENTER | wx.ALL, 5)
 
-        hbox2 = wx.BoxSizer(wx.HORIZONTAL)
-        st2 = wx.StaticText(panel, label='Matching Classes')
-        st2.SetFont(font)
-        hbox2.Add(st2)
-        vbox.Add(hbox2, flag=wx.LEFT | wx.TOP, border=10)
+        cmdChoiceChoices = [u"round", u"json"]
+        self.cmdChoice = wx.Choice(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cmdChoiceChoices, 0)
+        self.cmdChoice.SetSelection(0)
+        bSizer6.Add(self.cmdChoice, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
-        vbox.Add((-1, 10))
+        bSizer5.Add(bSizer6, 1, wx.EXPAND, 1)
 
-        hbox3 = wx.BoxSizer(wx.HORIZONTAL)
-        tc2 = wx.TextCtrl(panel, style=wx.TE_MULTILINE)
-        hbox3.Add(tc2, proportion=1, flag=wx.EXPAND)
-        vbox.Add(hbox3, proportion=1, flag=wx.LEFT | wx.RIGHT | wx.EXPAND,
-                 border=10)
+        self.cmdDesc = wx.TextCtrl(self, wx.ID_ANY, u"说明", wx.DefaultPosition, wx.Size(-1, -1),
+                                   wx.TE_CHARWRAP | wx.TE_LEFT | wx.TE_MULTILINE | wx.TE_NOHIDESEL | wx.TE_NO_VSCROLL | wx.TE_READONLY | wx.TE_WORDWRAP)
+        self.cmdDesc.SetForegroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_ACTIVEBORDER))
 
-        vbox.Add((-1, 25))
+        bSizer5.Add(self.cmdDesc, 22, wx.ALL | wx.EXPAND, 1)
 
-        hbox4 = wx.BoxSizer(wx.HORIZONTAL)
-        cb1 = wx.CheckBox(panel, label='Case Sensitive')
-        cb1.SetFont(font)
-        hbox4.Add(cb1)
-        cb2 = wx.CheckBox(panel, label='Nested Classes')
-        cb2.SetFont(font)
-        hbox4.Add(cb2, flag=wx.LEFT, border=10)
-        cb3 = wx.CheckBox(panel, label='Non-Project classes')
-        cb3.SetFont(font)
-        hbox4.Add(cb3, flag=wx.LEFT, border=10)
-        vbox.Add(hbox4, flag=wx.LEFT, border=10)
+        bSizer10.Add(bSizer5, 0, wx.EXPAND, 0)
 
-        vbox.Add((-1, 25))
+        self.auiNotebook = wx.aui.AuiNotebook(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize,
+                                              wx.aui.AUI_NB_DEFAULT_STYLE)
 
-        hbox5 = wx.BoxSizer(wx.HORIZONTAL)
-        btn1 = wx.Button(panel, label='Ok', size=(70, 30))
-        hbox5.Add(btn1)
-        btn2 = wx.Button(panel, label='Close', size=(70, 30))
-        hbox5.Add(btn2, flag=wx.LEFT | wx.BOTTOM, border=5)
-        vbox.Add(hbox5, flag=wx.ALIGN_RIGHT | wx.RIGHT, border=10)
+        bSizer10.Add(self.auiNotebook, 1, wx.EXPAND | wx.ALL, 5)
 
-        panel.SetSizer(vbox)
+        bSizer3.Add(bSizer10, 1, wx.EXPAND, 0)
 
-    def OnQuit(self, e):
-        self.Close()
+        self.m_button31 = wx.Button(self, wx.ID_ANY, u"格式化", wx.DefaultPosition, wx.DefaultSize, 0)
+        bSizer3.Add(self.m_button31, 0, wx.ALIGN_CENTER_HORIZONTAL | wx.ALL, 5)
+
+        self.SetSizer(bSizer3)
+        self.Layout()
+
+        self.Centre(wx.BOTH)
+
+        # Connect Events
+        self.cmdChoice.Bind(wx.EVT_CHOICE, self.changeCmd)
+
+        self.init()
+
+    def __del__(self):
+        pass
+
+    def init(self):
+        self.changeCmd(None)
+
+
+
+    def changeCmd(self, event):
+        item = CmdEnum.getItemByValue(self.cmdChoice.GetStringSelection())
+        self.cmdDesc.SetValue(item.value.get("desc"))
+        if item == CmdEnum.ROUND:
+            panel = RoundPanel(self.auiNotebook)
+            self.auiNotebook.AddPage(panel, u"round", False, 1)
+        elif item == CmdEnum.JSON:
+            panel = JSONPanel(self.auiNotebook)
+            self.auiNotebook.AddPage(panel, u"json", True, 2)
