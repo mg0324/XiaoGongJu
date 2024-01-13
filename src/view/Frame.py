@@ -94,8 +94,6 @@ class Frame(wx.Frame):
     def init(self):
         self.changeCmd(None)
 
-
-
     def changeCmd(self, event):
         item = CmdEnum.getItemByValue(self.cmdChoice.GetStringSelection())
         self.cmdDesc.SetValue(item.value.get("desc"))
