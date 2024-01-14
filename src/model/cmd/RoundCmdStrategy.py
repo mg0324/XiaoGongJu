@@ -5,28 +5,23 @@
 # @Time   : 2023/12/31 13:54
 # @Author : mango
 from src.config.CmdTypeEnum import CmdTypeEnum
-from src.model.CmdStrategy import CmdStrategy
+from src.model.RoundService import RoundService
+from src.model.cmd.CmdStrategy import CmdStrategy
+from src.vo.RoundVO import RoundVO
 
 
 class RoundCmdStrategy(CmdStrategy):
+    def __init__(self):
+        self.service = RoundService()
+
     def execute(self, app):
         args = app.argument.get_args()
         infile = args.in_file
         outfile = args.out_file
-        separator = args.separator
-        left = args.left
-        right = args.right
-        result = ""
         with open(infile, "r") as file:
-            index = 1
             lines = file.readlines()
-            rows = len(lines)
-            for line in lines:
-                line = line.replace("\n", "")
-                result += left + line + right
-                if index != rows:
-                    result += separator
-                index += 1
+        roundVO = RoundVO(args.left, args.right, args.separator, lines)
+        result = self.service.getResult(roundVO)
         with open(outfile, "w") as file:
             file.write(result)
 

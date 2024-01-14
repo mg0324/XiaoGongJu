@@ -5,8 +5,8 @@
 # @Time   : 2023/12/31 11:53
 # @Author : mango
 from src.config.CmdEnum import CmdEnum
-from src.model.JSONCmdStrategy import JSONCmdStrategy
-from src.model.RoundCmdStrategy import RoundCmdStrategy
+from src.model.cmd.JSONCmdStrategy import JSONCmdStrategy
+from src.model.cmd.RoundCmdStrategy import RoundCmdStrategy
 
 
 # cmd管理器

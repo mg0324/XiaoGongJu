@@ -11,10 +11,6 @@ import wx
 import wx.xrc
 import wx.aui
 
-from src.config.CmdEnum import CmdEnum
-from src.view.JSONPanel import JSONPanel
-from src.view.RoundPanel import RoundPanel
-
 
 ###########################################################################
 ## Class Frame
@@ -26,6 +22,8 @@ class Frame(wx.Frame):
         wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"小工具", pos=wx.DefaultPosition, size=wx.Size(1000, 700),
                           style=wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX | wx.TAB_TRAVERSAL)
 
+        self.jsonPanel = None
+        self.roundPanel = None
         self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
 
         self.menuBar = wx.MenuBar(0)
@@ -75,8 +73,8 @@ class Frame(wx.Frame):
 
         bSizer3.Add(bSizer10, 1, wx.EXPAND, 0)
 
-        self.m_button31 = wx.Button(self, wx.ID_ANY, u"格式化", wx.DefaultPosition, wx.DefaultSize, 0)
-        bSizer3.Add(self.m_button31, 0, wx.ALIGN_CENTER_HORIZONTAL | wx.ALL, 5)
+        self.btnFormat = wx.Button(self, wx.ID_ANY, u"格式化", wx.DefaultPosition, wx.DefaultSize, 0)
+        bSizer3.Add(self.btnFormat, 0, wx.ALIGN_CENTER_HORIZONTAL | wx.ALL, 5)
 
         self.SetSizer(bSizer3)
         self.Layout()
@@ -85,6 +83,7 @@ class Frame(wx.Frame):
 
         # Connect Events
         self.cmdChoice.Bind(wx.EVT_CHOICE, self.changeCmd)
+        self.btnFormat.Bind(wx.EVT_BUTTON, self.doFormat)
 
         self.init()
 
@@ -92,14 +91,11 @@ class Frame(wx.Frame):
         pass
 
     def init(self):
-        self.changeCmd(None)
+        pass
 
     def changeCmd(self, event):
-        item = CmdEnum.getItemByValue(self.cmdChoice.GetStringSelection())
-        self.cmdDesc.SetValue(item.value.get("desc"))
-        if item == CmdEnum.ROUND:
-            panel = RoundPanel(self.auiNotebook)
-            self.auiNotebook.AddPage(panel, u"round", False, 1)
-        elif item == CmdEnum.JSON:
-            panel = JSONPanel(self.auiNotebook)
-            self.auiNotebook.AddPage(panel, u"json", True, 2)
+        event.Skip()
+
+    def doFormat(self, event):
+        event.Skip()
+

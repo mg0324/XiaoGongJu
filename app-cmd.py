@@ -9,7 +9,7 @@ from src.util.LogUtil import LogUtil
 from src.config.Config import Config
 from src.util.showtime import showtime
 from src.view.Argument import Argument
-from src.model.CmdManager import CmdManager
+from src.model.cmd.CmdManager import CmdManager
 
 
 class App:

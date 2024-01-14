@@ -86,7 +86,7 @@ class RoundPanel(wx.Panel):
 
         self.richTextOutput = wx.richtext.RichTextCtrl(sbSizer5.GetStaticBox(), wx.ID_ANY, u"output",
                                                        wx.DefaultPosition, wx.DefaultSize,
-                                                       0 | wx.VSCROLL | wx.HSCROLL | wx.NO_BORDER | wx.WANTS_CHARS)
+                                                       0 | wx.VSCROLL | wx.HSCROLL | wx.NO_BORDER | wx.TE_MULTILINE)
         sbSizer5.Add(self.richTextOutput, 1, wx.EXPAND | wx.ALL, 0)
 
         bSizer7.Add(sbSizer5, 10, wx.EXPAND, 5)
@@ -97,8 +97,13 @@ class RoundPanel(wx.Panel):
         # Connect Events
         self.templateChoice.Bind(wx.EVT_CHOICE, self.changeTemplate)
 
+        self.init()
+
     def __del__(self):
         pass
+
+    def init(self):
+        self.changeTemplate(None)
 
     def changeTemplate(self, event):
         template = TemplateConfig.getConfig().get(self.templateChoice.GetStringSelection())

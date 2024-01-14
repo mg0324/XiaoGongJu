@@ -4,13 +4,16 @@
 # @File   : JSONCmdStrategy
 # @Time   : 2023/12/31 22:43
 # @Author : mango
-import json
-
 from src.config.CmdTypeEnum import CmdTypeEnum
-from src.model.CmdStrategy import CmdStrategy
+from src.model.JSONService import JSONService
+from src.model.cmd.CmdStrategy import CmdStrategy
+from src.vo.JSONVO import JSONVO
 
 
 class JSONCmdStrategy(CmdStrategy):
+    def __init__(self):
+        self.service = JSONService()
+
     def execute(self, app):
         # 格式化json
         file = app.argument.get_args().file
@@ -18,8 +21,7 @@ class JSONCmdStrategy(CmdStrategy):
             with open(file, 'r') as f:
                 data = f.read()
             # json格式化
-            data = json.loads(data)
-            data = json.dumps(data, indent=4, ensure_ascii=False)
+            data = self.service.getResult(JSONVO(data))
             with open(file, 'w') as f:
                 f.write(data)
 
