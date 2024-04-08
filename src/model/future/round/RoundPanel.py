@@ -11,8 +11,6 @@ import wx
 import wx.xrc
 import wx.richtext
 
-from src.config.TemplateConfig import TemplateConfig
-
 
 ###########################################################################
 ## Class RoundPanel
@@ -73,7 +71,7 @@ class RoundPanel(wx.Panel):
 
         bSizer7.Add(bSizer11, 1, wx.EXPAND, 5)
 
-        sbSizer4 = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"输入文件input.txt"), wx.VERTICAL)
+        sbSizer4 = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"输入"), wx.VERTICAL)
 
         self.richTextInput = wx.richtext.RichTextCtrl(sbSizer4.GetStaticBox(), wx.ID_ANY, u"input", wx.DefaultPosition,
                                                       wx.DefaultSize,
@@ -82,32 +80,35 @@ class RoundPanel(wx.Panel):
 
         bSizer7.Add(sbSizer4, 10, wx.EXPAND, 5)
 
-        sbSizer5 = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"输出文件output.txt"), wx.VERTICAL)
+        sbSizer5 = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"输出"), wx.VERTICAL)
 
         self.richTextOutput = wx.richtext.RichTextCtrl(sbSizer5.GetStaticBox(), wx.ID_ANY, u"output",
                                                        wx.DefaultPosition, wx.DefaultSize,
-                                                       0 | wx.VSCROLL | wx.HSCROLL | wx.NO_BORDER | wx.TE_MULTILINE)
+                                                       wx.TE_PROCESS_ENTER | wx.VSCROLL | wx.HSCROLL | wx.NO_BORDER | wx.WANTS_CHARS)
         sbSizer5.Add(self.richTextOutput, 1, wx.EXPAND | wx.ALL, 0)
 
         bSizer7.Add(sbSizer5, 10, wx.EXPAND, 5)
+
+        bSizer8 = wx.BoxSizer(wx.VERTICAL)
+
+        self.btnFormat = wx.Button(self, wx.ID_ANY, u"格式化", wx.DefaultPosition, wx.DefaultSize, 0)
+        bSizer8.Add(self.btnFormat, 0, wx.ALL, 5)
+
+        bSizer7.Add(bSizer8, 1, wx.EXPAND, 5)
 
         self.SetSizer(bSizer7)
         self.Layout()
 
         # Connect Events
         self.templateChoice.Bind(wx.EVT_CHOICE, self.changeTemplate)
-
-        self.init()
+        self.btnFormat.Bind(wx.EVT_BUTTON, self.doFormat)
 
     def __del__(self):
         pass
 
-    def init(self):
-        self.changeTemplate(None)
-
+    # Virtual event handlers, override them in your derived class
     def changeTemplate(self, event):
-        template = TemplateConfig.getConfig().get(self.templateChoice.GetStringSelection())
-        self.templateDesc.SetLabel(template.get("desc"))
-        self.inputLeft.SetValue(template.get("left"))
-        self.inputRight.SetValue(template.get("right"))
-        self.inputSeparator.SetValue(template.get("separator"))
+        event.Skip()
+
+    def doFormat(self, event):
+        event.Skip()

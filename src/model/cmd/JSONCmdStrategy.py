@@ -5,7 +5,7 @@
 # @Time   : 2023/12/31 22:43
 # @Author : mango
 from src.config.CmdTypeEnum import CmdTypeEnum
-from src.model.JSONService import JSONService
+from src.model.future.json.JSONService import JSONService
 from src.model.cmd.CmdStrategy import CmdStrategy
 from src.vo.JSONVO import JSONVO
 

@@ -11,6 +11,8 @@ import wx
 import wx.xrc
 import wx.aui
 
+from src.config.CmdEnum import CmdEnum
+
 
 ###########################################################################
 ## Class Frame
@@ -22,8 +24,6 @@ class Frame(wx.Frame):
         wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"小工具", pos=wx.DefaultPosition, size=wx.Size(1000, 700),
                           style=wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX | wx.TAB_TRAVERSAL)
 
-        self.jsonPanel = None
-        self.roundPanel = None
         self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
 
         self.menuBar = wx.MenuBar(0)
@@ -51,7 +51,7 @@ class Frame(wx.Frame):
 
         bSizer6.Add(self.m_staticText20, 0, wx.ALIGN_CENTER | wx.ALL, 5)
 
-        cmdChoiceChoices = [u"round", u"json"]
+        cmdChoiceChoices = CmdEnum.getCmdList()
         self.cmdChoice = wx.Choice(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cmdChoiceChoices, 0)
         self.cmdChoice.SetSelection(0)
         bSizer6.Add(self.cmdChoice, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
@@ -73,9 +73,6 @@ class Frame(wx.Frame):
 
         bSizer3.Add(bSizer10, 1, wx.EXPAND, 0)
 
-        self.btnFormat = wx.Button(self, wx.ID_ANY, u"格式化", wx.DefaultPosition, wx.DefaultSize, 0)
-        bSizer3.Add(self.btnFormat, 0, wx.ALIGN_CENTER_HORIZONTAL | wx.ALL, 5)
-
         self.SetSizer(bSizer3)
         self.Layout()
 
@@ -83,8 +80,6 @@ class Frame(wx.Frame):
 
         # Connect Events
         self.cmdChoice.Bind(wx.EVT_CHOICE, self.changeCmd)
-        self.btnFormat.Bind(wx.EVT_BUTTON, self.doFormat)
-
         self.init()
 
     def __del__(self):
@@ -93,9 +88,6 @@ class Frame(wx.Frame):
     def init(self):
         pass
 
+    # Virtual event handlers, override them in your derived class
     def changeCmd(self, event):
         event.Skip()
-
-    def doFormat(self, event):
-        event.Skip()
-

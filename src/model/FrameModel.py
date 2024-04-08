@@ -17,12 +17,7 @@ class FrameModel(Frame):
     def changeCmd(self, event):
         item = CmdEnum.getItemByValue(self.cmdChoice.GetStringSelection())
         self.cmdDesc.SetValue(item.value.get("desc"))
-        panelStrategy = PanelManager.get_instance(item.value.get("value"))
+        name = item.value.get("value")
+        panelStrategy = PanelManager.get_instance(name)
         if panelStrategy:
-            panelStrategy.handlePanel(self)
-
-    def doFormat(self, event):
-        index = self.auiNotebook.GetSelection()
-        panelStrategy = PanelManager.get_instance(index)
-        if panelStrategy:
-            panelStrategy.format(self)
+            panelStrategy.handlePanel(self, name)

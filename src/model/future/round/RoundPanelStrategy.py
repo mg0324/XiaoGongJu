@@ -4,11 +4,11 @@
 # @File   : RoundPanelStrategy
 # @Time   : 2024/1/14 13:56
 # @Author : mango
-from src.config.CmdTypeEnum import CmdTypeEnum
-from src.model.RoundService import RoundService
+from src.config.CmdEnum import CmdEnum
+from src.model.future.round.RoundPanelImpl import RoundPanelImpl
+from src.model.future.round.RoundService import RoundService
 from src.model.ui.PanelStrategy import PanelStrategy
 from src.util.WxUtil import WxUtil
-from src.view.panel.RoundPanel import RoundPanel
 from src.vo.RoundVO import RoundVO
 
 
@@ -18,16 +18,12 @@ class RoundPanelStrategy(PanelStrategy):
         self.panel = None
         self.service = RoundService()
 
-    def getPanel(self):
+    def createPanel(self, app):
+        self.panel = RoundPanelImpl(app.auiNotebook)
         return self.panel
 
-    def handlePanel(self, app):
-        if self.panel:
-            app.auiNotebook.SetSelection(0)
-        else:
-            self.panel = RoundPanel(app.auiNotebook)
-            app.auiNotebook.InsertPage(0, self.panel, u"round", True)
-        pass
+    def getPanel(self):
+        return self.panel
 
     def format(self, app):
         separator = self.panel.inputSeparator.GetValue()
@@ -40,5 +36,5 @@ class RoundPanelStrategy(PanelStrategy):
         WxUtil.writeResult2RichText(self.panel.richTextOutput, result)
 
     def type(self):
-        return CmdTypeEnum.FORMATE
+        return CmdEnum.ROUND
 

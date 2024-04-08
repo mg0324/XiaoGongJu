@@ -24,3 +24,6 @@ class CmdEnum(Enum):
                 return item
         return ""
 
+    @staticmethod
+    def getCmdList():
+        return [item.value.get("value") for item in CmdEnum]

@@ -4,11 +4,12 @@
 # @File   : JSONPanelStrategy
 # @Time   : 2024/1/14 13:56
 # @Author : mango
-from src.config.CmdTypeEnum import CmdTypeEnum
-from src.model.JSONService import JSONService
+from src.config.CmdEnum import CmdEnum
+from src.model.future.json.JSONPanelImpl import JSONPanelImpl
+from src.model.future.json.JSONService import JSONService
 from src.model.ui.PanelStrategy import PanelStrategy
 from src.util.WxUtil import WxUtil
-from src.view.panel.JSONPanel import JSONPanel
+from src.model.future.json.JSONPanel import JSONPanel
 from src.vo.JSONVO import JSONVO
 
 
@@ -18,15 +19,12 @@ class JSONPanelStrategy(PanelStrategy):
         self.panel = None
         self.service = JSONService()
 
-    def getPanel(self):
+    def createPanel(self, app):
+        self.panel = JSONPanelImpl(app.auiNotebook)
         return self.panel
 
-    def handlePanel(self, app):
-        if self.panel:
-            app.auiNotebook.SetSelection(1)
-        else:
-            self.panel = JSONPanel(app.auiNotebook)
-            app.auiNotebook.InsertPage(1, self.panel, u"json", True)
+    def getPanel(self):
+        return self.panel
 
     def format(self, app):
         intputStr = self.panel.richTextInput.GetValue()
@@ -34,5 +32,5 @@ class JSONPanelStrategy(PanelStrategy):
         WxUtil.writeResult2RichText(self.panel.richTextOutput, result)
 
     def type(self):
-        return CmdTypeEnum.FORMATE
+        return CmdEnum.JSON
 
