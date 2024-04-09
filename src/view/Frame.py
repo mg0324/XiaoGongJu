@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from abc import abstractmethod, ABC
 
 ###########################################################################
 ## Python code generated with wxFormBuilder (version 4.0.0-0-g0efcecf)
@@ -21,20 +22,21 @@ from src.config.CmdEnum import CmdEnum
 class Frame(wx.Frame):
 
     def __init__(self, parent):
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"小工具", pos=wx.DefaultPosition, size=wx.Size(1000, 700),
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=self.title(), pos=wx.DefaultPosition,
+                          size=self.getSize(),
                           style=wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX | wx.TAB_TRAVERSAL)
 
         self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
 
         self.menuBar = wx.MenuBar(0)
         self.menuFile = wx.Menu()
-        self.m_menuItem1 = wx.MenuItem(self.menuFile, wx.ID_ANY, u"退出", wx.EmptyString, wx.ITEM_NORMAL)
-        self.menuFile.Append(self.m_menuItem1)
+        self.menuAbout = wx.MenuItem(self.menuFile, wx.ID_ANY, u"关于", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menuFile.Append(self.menuAbout)
+
+        self.menuExit = wx.MenuItem(self.menuFile, wx.ID_ANY, u"退出", wx.EmptyString, wx.ITEM_NORMAL)
+        self.menuFile.Append(self.menuExit)
 
         self.menuBar.Append(self.menuFile, u"文件")
-
-        self.menuAbout = wx.Menu()
-        self.menuBar.Append(self.menuAbout, u"关于")
 
         self.SetMenuBar(self.menuBar)
 
@@ -51,7 +53,7 @@ class Frame(wx.Frame):
 
         bSizer6.Add(self.m_staticText20, 0, wx.ALIGN_CENTER | wx.ALL, 5)
 
-        cmdChoiceChoices = CmdEnum.getCmdList()
+        cmdChoiceChoices = self.getChoices()
         self.cmdChoice = wx.Choice(self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, cmdChoiceChoices, 0)
         self.cmdChoice.SetSelection(0)
         bSizer6.Add(self.cmdChoice, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
@@ -79,15 +81,38 @@ class Frame(wx.Frame):
         self.Centre(wx.BOTH)
 
         # Connect Events
+        self.Bind(wx.EVT_MENU, self.onAbout, id=self.menuAbout.GetId())
+        self.Bind(wx.EVT_MENU, self.onExit, id=self.menuExit.GetId())
         self.cmdChoice.Bind(wx.EVT_CHOICE, self.changeCmd)
+
         self.init()
 
     def __del__(self):
         pass
 
-    def init(self):
+    @abstractmethod
+    def getChoices(self):
+        pass
+
+    @abstractmethod
+    def title(self):
+        pass
+
+    @abstractmethod
+    def getSize(self):
         pass
 
     # Virtual event handlers, override them in your derived class
+    def onAbout(self, event):
+        event.Skip()
+
+    def onExit(self, event):
+        event.Skip()
+
     def changeCmd(self, event):
         event.Skip()
+
+    def init(self):
+        pass
+
+

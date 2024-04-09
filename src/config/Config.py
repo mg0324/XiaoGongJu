@@ -12,6 +12,15 @@ class Config:
     __version = "1.0.0"
     # 日志级别
     log_level = "debug"
+    # 窗体大小
+    windowSize = (1200, 800)
+    # 关于
+    about = {
+        "name": "小工具",
+        "version": "1.0.0",
+        "copyright": "(C) 2024 MangoMei",
+        "desc": "一个简单的工具箱"
+    }
 
     def __init__(self):
         pass

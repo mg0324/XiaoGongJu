@@ -34,6 +34,6 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ## 打包发布
 ``` shell
 pip install pyinstaller
-pyinstaller -F app-cmd.py
+pyinstaller -F -w -i='logo.ico' -D --add-data="images:images" app-wx.py
 ```
 
