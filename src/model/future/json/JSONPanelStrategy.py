@@ -26,11 +26,6 @@ class JSONPanelStrategy(PanelStrategy):
     def getPanel(self):
         return self.panel
 
-    def format(self, app):
-        intputStr = self.panel.richTextInput.GetValue()
-        result = self.service.getResult(JSONVO(intputStr))
-        WxUtil.writeResult2RichText(self.panel.richTextOutput, result)
-
     def type(self):
         return CmdEnum.JSON
 
