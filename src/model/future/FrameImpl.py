@@ -9,11 +9,11 @@ import wx.adv
 
 from src.config.CmdEnum import CmdEnum
 from src.config.Config import Config
-from src.model.ui.PanelManager import PanelManager
+from src.model.future.PanelManager import PanelManager
 from src.view.Frame import Frame
 
 
-class FrameModel(Frame):
+class FrameImpl(Frame):
 
     def init(self):
         self.changeCmd(None)

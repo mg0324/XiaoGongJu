@@ -6,6 +6,7 @@
 # @Author : mango
 from src.config.CmdEnum import CmdEnum
 from src.model.future.json.JSONPanelStrategy import JSONPanelStrategy
+from src.model.future.miaowa.MiaoWaPanelStrategy import MiaoWaPanelStrategy
 from src.model.future.round.RoundPanelStrategy import RoundPanelStrategy
 
 
@@ -15,6 +16,7 @@ class PanelManager:
     __impl = {
         CmdEnum.ROUND.value.get("value"): RoundPanelStrategy(),
         CmdEnum.JSON.value.get("value"): JSONPanelStrategy(),
+        CmdEnum.MIAO_WA.value.get("value"): MiaoWaPanelStrategy()
     }
 
     @staticmethod

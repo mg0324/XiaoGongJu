@@ -16,6 +16,10 @@ class CmdEnum(Enum):
         "value": "json",
         "desc": "json格式化命令，可以将字符串格式化为json格式。"
     }
+    MIAO_WA = {
+        "value": "miaoMa",
+        "desc": "妙娃店铺运营小帮手。"
+    }
 
     @staticmethod
     def getItemByValue(value):

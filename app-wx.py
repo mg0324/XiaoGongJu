@@ -6,12 +6,12 @@
 # @Author : mango
 import wx
 
-from src.model.FrameModel import FrameModel
+from src.model.future.FrameImpl import FrameImpl
 
 
 def main():
     app = wx.App()
-    ex = FrameModel(None)
+    ex = FrameImpl(None)
     ex.Show()
     app.MainLoop()
 
