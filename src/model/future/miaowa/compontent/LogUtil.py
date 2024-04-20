@@ -1,12 +1,6 @@
-# !/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Project: XiaoGongJu
-# @File   : LogUtil
-# @Time   : 2023/12/31 11:23
-# @Author : mango
+# coding=utf-8
+# 日志工具
 
-
-# 控制台日志工具
 class LogUtil:
     # 日志级别 error > info > debug > warning
     __level = "debug"
@@ -52,4 +46,5 @@ class LogUtil:
     def error(msg):
         LogUtil.__log__("error", msg)
         pass
+
 

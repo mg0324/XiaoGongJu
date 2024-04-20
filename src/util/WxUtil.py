@@ -16,3 +16,10 @@ class WxUtil:
         richText.Clear()
         richText.WriteText(result)
         richText.EndAllStyles()
+
+    @staticmethod
+    def appendResult2RichText(richText, result):
+        attr = rt.RichTextAttr()
+        richText.BeginStyle(attr)
+        richText.AppendText(result)
+        richText.EndAllStyles()
