@@ -48,7 +48,7 @@ class Frame(wx.Frame):
 
         bSizer6 = wx.BoxSizer(wx.HORIZONTAL)
 
-        self.m_staticText20 = wx.StaticText(self, wx.ID_ANY, u"命令", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.m_staticText20 = wx.StaticText(self, wx.ID_ANY, u"特性", wx.DefaultPosition, wx.DefaultSize, 0)
         self.m_staticText20.Wrap(-1)
 
         bSizer6.Add(self.m_staticText20, 0, wx.ALIGN_CENTER | wx.ALL, 5)

@@ -19,7 +19,7 @@ class Config:
         "name": "小工具",
         "version": "1.0.0",
         "copyright": "(C) 2024 MangoMei",
-        "desc": "一个简单的工具箱，目前实现了round和json格式化！"
+        "desc": "妙娃程序，专注于帮忙妙头运营店铺的自动化工具！"
     }
 
     def __init__(self):

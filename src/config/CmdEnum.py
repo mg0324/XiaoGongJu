@@ -8,6 +8,10 @@ from enum import Enum
 
 
 class CmdEnum(Enum):
+    MIAO_WA = {
+        "value": "miaoMa",
+        "desc": "妙娃店铺运营小帮手。"
+    }
     ROUND = {
         "value": "round",
         "desc": "切面命令，在字符串前后可以新增自定义内容。"
@@ -15,10 +19,6 @@ class CmdEnum(Enum):
     JSON = {
         "value": "json",
         "desc": "json格式化命令，可以将字符串格式化为json格式。"
-    }
-    MIAO_WA = {
-        "value": "miaoMa",
-        "desc": "妙娃店铺运营小帮手。"
     }
 
     @staticmethod

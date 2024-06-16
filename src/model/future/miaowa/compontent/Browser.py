@@ -1,7 +1,6 @@
 # coding=utf-8
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
 from src.model.future.miaowa.compontent.GetTime import GetTime
 
 
@@ -42,14 +41,13 @@ def new_chrome(argument):
     # browser.minimize_window()
     return browser
 
-robot = None
 
 # 浏览器
 class Browser:
     __instance = None
 
-    def __init__(self, robot):
-        robot = robot
+    def __init__(self, context):
+        self.new_browser(context)
         pass
 
     @GetTime("创建浏览器")

@@ -6,11 +6,9 @@ from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.model.future.miaowa.compontent.cmd.CmdExecutor import CmdExecutor
 from src.model.future.miaowa.compontent.order.OrderManager import OrderManager
 
-robot = None
 
 # review and follow 执行
 class ReviewAndFollowCmdExecutor(CmdExecutor):
-    
     # 到详情页
     @GetTime("到详情页")
     def goto_detail(self, robot, order_number):
@@ -25,7 +23,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         order_strategy = OrderManager.get_instance("spider")
         # print(order_strategy)
         orders = order_strategy.fetch_order_list(robot)
-        robot.log(f"[store={robot.store.get_name()}]本次处理订单列表为{str(orders)}")
+        LogUtil.info(f"[store={robot.store.get_name()}]本次处理订单列表为{str(orders)}")
         return orders
 
     def execute(self, robot):
@@ -38,7 +36,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
             prefix = "[store=" + robot.store.get_name() + "]订单号=" + order_number
             # 打开详情页
             self.goto_detail(robot, order_number)
-            robot.log(prefix + "到详情页")
+            LogUtil.info(prefix + "到详情页")
             # doFollow
             #if self.check_work_follow(robot):
             self.do_follow(robot, order_number)

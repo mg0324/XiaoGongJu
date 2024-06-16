@@ -16,22 +16,18 @@ from src.model.future.miaowa.compontent.Store import Store
 from src.model.future.miaowa.compontent.cmd.CmdManager import CmdManager
 from src.util.WxUtil import WxUtil
 
-robot = None
 
 class MiaoWaService(Service):
 
-    def __init__(self, context: Context, output):
-        robot = self
+    def __init__(self, context: Context):
         # 创建浏览器
-        self.browser = Browser(robot).new_browser(context)
+        self.browser = Browser(context)
         # 创建店
         self.store = Store(context.getStoreCode())
         # 参数上下文
         self.context = context
         # 配置
         self.config = Config()
-        # 输出
-        self.output = output
 
     def getResult(self):
         pass
@@ -59,7 +55,6 @@ class MiaoWaService(Service):
                     self.browser.add_cookie(cookie)
             # 设置登录状态为True
             self.store.set_login(True)
-            self.log("[store=" + self.store.get_name() + "]加载登录信息成功")
         pass
 
     # 登录到后端首页
@@ -75,6 +70,3 @@ class MiaoWaService(Service):
         self.browser.switch_window(0)
         self.browser.close()
         pass
-
-    def log(self, msg):
-        WxUtil.writeResult2RichText(self.output, msg)

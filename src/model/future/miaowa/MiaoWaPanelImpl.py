@@ -10,6 +10,7 @@ import traceback
 from src.model.future.miaowa.MiaoWaPanel import MiaoWaPanel
 from src.model.future.miaowa.MiaoWaService import MiaoWaService
 from src.model.future.miaowa.compontent.Context import Context
+from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.util.WxUtil import WxUtil
 
 _store = {
@@ -37,18 +38,15 @@ class MiaoWaPanelImpl(MiaoWaPanel):
         self.service = None
 
     def doExecute(self, event):
-        print("doExecute")
         storeLabel = self.choiceStore.GetStringSelection()
         storeCode = _store[storeLabel]["code"]
         page = self.choicePage.GetStringSelection()
         isRaf = self.radioRaf.GetValue()
         configDir = self.inputConfig.GetValue()
         choiceIsHeadless = self.choiceIsHeadless.GetStringSelection()
-        print(f'storeLabel:{storeLabel},storeCode:{storeCode},page:{page},isRaf:{isRaf},configDir:{configDir}'
-              f',choiceIsHeadless:{choiceIsHeadless}')
+        LogUtil.info(f'storeLabel:{storeLabel},storeCode:{storeCode},page:{page},isRaf:{isRaf},configDir:{configDir},choiceIsHeadless:{choiceIsHeadless}')
         self.service = MiaoWaService(context=Context(store=storeCode, page=page,
-                                                     configDir=configDir, isHeadless=choiceIsHeadless),
-                                     output=self.richTextOutput)
+                                                     configDir=configDir, isHeadless=choiceIsHeadless))
         try:
             self.service.startWorking("raf")
             self.service.shutDown()

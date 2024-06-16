@@ -1,6 +1,5 @@
 # coding=utf-8
 import time
-
 from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.model.future.miaowa.compontent.order.OrderStrategy import OrderStrategy
 
@@ -9,6 +8,7 @@ from src.model.future.miaowa.compontent.order.OrderStrategy import OrderStrategy
 def get_star_from_star_view(element):
     style = element.find_element_by_css_selector("span").get_attribute("style")
     return int(style.replace("width:", "").replace("%;",""))
+
 
 # 爬虫
 class SpiderOrderStrategy(OrderStrategy):
