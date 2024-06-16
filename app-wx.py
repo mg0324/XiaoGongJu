@@ -11,8 +11,8 @@ from src.model.future.FrameImpl import FrameImpl
 
 def main():
     app = wx.App()
-    ex = FrameImpl(None)
-    ex.Show()
+    frame = FrameImpl(None)
+    frame.Show(True)
     app.MainLoop()
 
 

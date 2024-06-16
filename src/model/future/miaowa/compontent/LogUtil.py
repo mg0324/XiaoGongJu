@@ -1,8 +1,9 @@
 # coding=utf-8
 # 日志工具
-import logging
 import logging.config
+import logging
 
+# 先加载配置
 logging.config.fileConfig('logging.conf')
 # 使用配置文件中的Logger
 logger = logging.getLogger('my_logger')

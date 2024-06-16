@@ -21,7 +21,7 @@ from src.config.CmdEnum import CmdEnum
 
 class Frame(wx.Frame):
 
-    def __init__(self, parent):
+    def __init__(self, parent, *args, **kw):
         wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=self.title(), pos=wx.DefaultPosition,
                           size=self.getSize(),
                           style=wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX | wx.TAB_TRAVERSAL)

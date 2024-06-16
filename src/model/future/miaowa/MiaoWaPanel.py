@@ -107,10 +107,8 @@ class MiaoWaPanel(wx.Panel):
 
         sbSizer51 = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"日志"), wx.VERTICAL)
 
-        self.richTextOutput = wx.richtext.RichTextCtrl(sbSizer51.GetStaticBox(), wx.ID_ANY, u"123", wx.DefaultPosition,
-                                                       wx.DefaultSize,
-                                                       0 | wx.VSCROLL | wx.HSCROLL | wx.NO_BORDER | wx.WANTS_CHARS)
-        sbSizer51.Add(self.richTextOutput, 1, wx.EXPAND | wx.ALL, 0)
+        self.long_text = wx.TextCtrl(self, style=wx.TE_MULTILINE | wx.TE_READONLY)
+        sbSizer51.Add(self.long_text, 1, wx.EXPAND | wx.ALL, 0)
 
         bSizer12.Add(sbSizer51, 20, wx.EXPAND, 5)
 

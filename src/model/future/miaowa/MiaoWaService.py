@@ -5,6 +5,7 @@
 # @Time   : 2024/1/14 13:23
 # @Author : mango
 import json
+import time
 
 from src.model.Service import Service
 from src.model.future.miaowa.compontent.Browser import Browser
@@ -14,7 +15,6 @@ from src.model.future.miaowa.compontent.GetTime import GetTime
 from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.model.future.miaowa.compontent.Store import Store
 from src.model.future.miaowa.compontent.cmd.CmdManager import CmdManager
-from src.util.WxUtil import WxUtil
 
 
 class MiaoWaService(Service):
@@ -38,6 +38,8 @@ class MiaoWaService(Service):
         if cmdExecutor:
             LogUtil.debug("执行命令:" + cmdName)
             cmdExecutor.execute(self)
+            # 执行完成之后关闭
+            self.shutDown()
 
     @GetTime("登录到店")
     def do_login(self):
@@ -69,4 +71,19 @@ class MiaoWaService(Service):
     def shutDown(self):
         self.browser.switch_window(0)
         self.browser.close()
-        pass
+
+
+    def scanLog(self):
+        log_pos = 0
+        while True:
+            with open("app.log", 'r') as f:
+                # 移动到上次读取的位置
+                f.seek(log_pos)
+                # 读取新的日志内容
+                lines = f.readlines()
+                if lines:
+                    for line in lines:
+                        print(line.strip())
+                    # 更新读取位置
+                    log_pos = f.tell()
+            time.sleep(1)  # 每秒扫描一次日志文件
