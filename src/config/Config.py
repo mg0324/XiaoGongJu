@@ -9,7 +9,7 @@
 # 配置类
 class Config:
     # 系统版本
-    __version = "1.0.0"
+    __version = "1.1.0"
     # 日志级别
     log_level = "debug"
     # 窗体大小
@@ -17,7 +17,7 @@ class Config:
     # 关于
     about = {
         "name": "小工具",
-        "version": "1.0.0",
+        "version": __version,
         "copyright": "(C) 2024 MangoMei",
         "desc": "妙娃程序，专注于帮忙妙头运营店铺的自动化工具！"
     }
