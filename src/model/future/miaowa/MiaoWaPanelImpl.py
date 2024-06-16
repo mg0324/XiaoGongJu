@@ -4,6 +4,9 @@
 # @File   : MiaoWaPanelImpl
 # @Time   : 2024/4/13 22:13
 # @Author : mango
+import os
+import platform
+import subprocess
 import traceback
 import threading
 
@@ -72,3 +75,25 @@ class MiaoWaPanelImpl(MiaoWaPanel):
             msg = "程序出错，{} \n".format(e)
             self.richTextOutput.AppendText(msg)
         pass
+
+
+    def openDir(self, event):
+        path = Config.getDefaultConfigDir()
+        # 确保路径存在
+        if not os.path.isdir(path):
+            raise NotADirectoryError(f"{path} 不是一个有效的目录")
+
+        # 获取当前操作系统类型
+        system = platform.system()
+
+        try:
+            if system == "Windows":
+                os.startfile(path)
+            elif system == "Darwin":  # macOS
+                subprocess.Popen(["open", path])
+            elif system == "Linux":
+                subprocess.Popen(["xdg-open", path])
+            else:
+                raise NotImplementedError(f"不支持的操作系统: {system}")
+        except Exception as e:
+            print(f"打开目录时出错: {e}")

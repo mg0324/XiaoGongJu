@@ -11,8 +11,6 @@ import wx
 import wx.xrc
 import wx.richtext
 
-from src.model.future.miaowa.compontent.Config import Config
-
 
 ###########################################################################
 ## Class MiaoWaPanel
