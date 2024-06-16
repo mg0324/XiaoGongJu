@@ -38,6 +38,7 @@ class MiaoWaPanelImpl(MiaoWaPanel):
         self.choiceStore.Set(getStoreList())
         self.choicePage.Set([str(x) for x in range(1, 10)])
         self.inputConfig.SetValue(Config.getDefaultConfigDir())
+        self.textVersion.SetLabel(f"V{Config.getMiaoWaVersion()}")
         self.service = None
         self.setup_logging()
 

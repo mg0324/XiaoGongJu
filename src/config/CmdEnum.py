@@ -10,7 +10,7 @@ from enum import Enum
 class CmdEnum(Enum):
     MIAO_WA = {
         "value": "miaoMa",
-        "desc": "妙娃店铺运营小帮手。"
+        "desc": "店铺运营小帮手。\n 1. 可点击打开目录按钮，打开配置目录。\n 2. 若子功能出现问题，可选择关闭无头浏览器特性。\n"
     }
     ROUND = {
         "value": "round",
