@@ -3,8 +3,10 @@
 import logging.config
 import logging
 
+from src.model.future.miaowa.compontent.Config import Config
+
 # 先加载配置
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig(Config.getDefaultConfigDir() + '/logging.conf')
 # 使用配置文件中的Logger
 logger = logging.getLogger('my_logger')
 

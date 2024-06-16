@@ -4,13 +4,13 @@
 # @File   : MiaoWaPanelImpl
 # @Time   : 2024/4/13 22:13
 # @Author : mango
-import os
 import traceback
 import threading
 import logging
 
 from src.model.future.miaowa.MiaoWaPanel import MiaoWaPanel
 from src.model.future.miaowa.MiaoWaService import MiaoWaService
+from src.model.future.miaowa.compontent.Config import Config
 from src.model.future.miaowa.compontent.Context import Context
 from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.model.future.miaowa.LogHandler import WxTextCtrlHandler
@@ -29,17 +29,13 @@ def getStoreList():
     return list(_store)
 
 
-def getDefaultConfigDir():
-    return os.path.expanduser("~") + "/.xgj/miaoWa"
-
-
 class MiaoWaPanelImpl(MiaoWaPanel):
     service = None
 
     def init(self):
         self.choiceStore.Set(getStoreList())
         self.choicePage.Set([str(x) for x in range(1, 10)])
-        self.inputConfig.SetValue(getDefaultConfigDir())
+        self.inputConfig.SetValue(Config.getDefaultConfigDir())
         self.service = None
         self.setup_logging()
 
@@ -49,7 +45,7 @@ class MiaoWaPanelImpl(MiaoWaPanel):
         Set up logging from configuration file and initialize wxHandler.
         """
         # 先加载配置
-        logging.config.fileConfig('logging.conf')
+        logging.config.fileConfig(Config.getDefaultConfigDir() + '/logging.conf')
         # 使用配置文件中的Logger
         logger = logging.getLogger('my_logger')
 

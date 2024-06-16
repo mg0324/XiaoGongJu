@@ -1,5 +1,8 @@
 # coding=utf-8
 # 配置类
+import os
+
+
 class Config:
     # 系统版本
     __version = "1.0.0"
@@ -17,4 +20,6 @@ class Config:
     def get_config_path(config_dir, store_kind, config_type):
         return config_dir + "/" + store_kind + "/" + config_type + ".json"
 
-
+    @staticmethod
+    def getDefaultConfigDir():
+        return os.path.expanduser("~") + "/.xgj/miaoWa"
