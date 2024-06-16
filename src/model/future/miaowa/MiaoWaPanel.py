@@ -11,6 +11,8 @@ import wx
 import wx.xrc
 import wx.richtext
 
+from src.model.future.miaowa.compontent.Config import Config
+
 
 ###########################################################################
 ## Class MiaoWaPanel
@@ -32,10 +34,10 @@ class MiaoWaPanel(wx.Panel):
 
         wSizer2.Add(self.m_staticText13, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
-        self.m_staticText14 = wx.StaticText(self, wx.ID_ANY, u"V1.0.0", wx.DefaultPosition, wx.DefaultSize, 0)
-        self.m_staticText14.Wrap(-1)
+        self.textVersion = wx.StaticText(self, wx.ID_ANY, f"", wx.DefaultPosition, wx.DefaultSize, 0)
+        self.textVersion.Wrap(-1)
 
-        wSizer2.Add(self.m_staticText14, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+        wSizer2.Add(self.textVersion, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
         bSizer12.Add(wSizer2, 0, wx.EXPAND, 5)
 
@@ -55,18 +57,17 @@ class MiaoWaPanel(wx.Panel):
 
         self.m_staticText15 = wx.StaticText(self, wx.ID_ANY, u"配置目录：", wx.DefaultPosition, wx.Size(-1, -1),
                                             wx.ALIGN_RIGHT)
-        self.m_staticText15.Wrap(-1)
 
-        self.m_staticText15.SetToolTip(u"xxx")
+        self.m_staticText15.SetToolTip(u"配置目录")
 
         wSizer5.Add(self.m_staticText15, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
         self.inputConfig = wx.TextCtrl(self, wx.ID_ANY, u"/Users/mango/.xgj/miaowa", wx.DefaultPosition,
-                                       wx.Size(200, -1), 0)
+                                       wx.Size(200, -1), wx.TE_READONLY)
         wSizer5.Add(self.inputConfig, 0, wx.ALL, 5)
 
-        self.m_button12 = wx.Button(self, wx.ID_ANY, u"保存", wx.DefaultPosition, wx.DefaultSize, 0)
-        wSizer5.Add(self.m_button12, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+        self.btnConfigOpen = wx.Button(self, wx.ID_ANY, u"打开目录", wx.DefaultPosition, wx.DefaultSize, 0)
+        wSizer5.Add(self.btnConfigOpen, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
         bSizer12.Add(wSizer5, 0, wx.EXPAND, 5)
 
@@ -87,13 +88,13 @@ class MiaoWaPanel(wx.Panel):
 
         wSizer6.Add(self.m_staticText21, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
-        self.radioRaf = wx.RadioButton(self, wx.ID_ANY, u"RAF", wx.DefaultPosition, wx.Size(200, -1), 0)
+        self.radioRaf = wx.RadioButton(self, wx.ID_ANY, u"RAF-评价和Follow", wx.DefaultPosition, wx.Size(-1, -1), 0)
         self.radioRaf.SetValue(True)
         self.radioRaf.SetToolTip(u"评价并且发生Follow消息")
 
         wSizer6.Add(self.radioRaf, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
-        self.radioSd = wx.RadioButton(self, wx.ID_ANY, u"SD", wx.DefaultPosition, wx.Size(200, -1), 0)
+        self.radioSd = wx.RadioButton(self, wx.ID_ANY, u"SD-店铺数据", wx.DefaultPosition, wx.Size(-1, -1), 0)
         self.radioSd.SetValue(False)
         self.radioSd.SetToolTip(u"店铺数据保存")
 
@@ -113,8 +114,10 @@ class MiaoWaPanel(wx.Panel):
 
         sbSizer51 = wx.StaticBoxSizer(wx.StaticBox(self, wx.ID_ANY, u"日志"), wx.VERTICAL)
 
-        self.long_text = wx.TextCtrl(self, style=wx.TE_MULTILINE | wx.TE_READONLY)
-        sbSizer51.Add(self.long_text, 1, wx.EXPAND | wx.ALL, 0)
+        self.richTextOutput = wx.richtext.RichTextCtrl(sbSizer51.GetStaticBox(), wx.ID_ANY, u"", wx.DefaultPosition,
+                                                       wx.DefaultSize,
+                                                       0 | wx.VSCROLL | wx.HSCROLL | wx.NO_BORDER | wx.WANTS_CHARS)
+        sbSizer51.Add(self.richTextOutput, 1, wx.EXPAND | wx.ALL, 0)
 
         bSizer12.Add(sbSizer51, 20, wx.EXPAND, 5)
 
@@ -129,6 +132,7 @@ class MiaoWaPanel(wx.Panel):
         self.Layout()
 
         # Connect Events
+        self.btnConfigOpen.Bind(wx.EVT_BUTTON, self.openDir)
         self.btnMain.Bind(wx.EVT_BUTTON, self.doExecute)
         self.init()
 
@@ -136,5 +140,8 @@ class MiaoWaPanel(wx.Panel):
         pass
 
     # Virtual event handlers, override them in your derived class
+    def openDir(self, event):
+        event.Skip()
+
     def doExecute(self, event):
         event.Skip()

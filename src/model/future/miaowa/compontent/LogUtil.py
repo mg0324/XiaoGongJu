@@ -32,4 +32,8 @@ class LogUtil:
         logger.error(msg)
         pass
 
+    @staticmethod
+    def getLogger():
+        return logger
+
 

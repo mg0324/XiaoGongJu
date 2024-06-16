@@ -5,7 +5,7 @@ import os
 
 class Config:
     # 系统版本
-    __version = "1.0.0"
+    version = "1.1.0"
     # follow消息
     follow_msg = "Dear friend, \n Please follow my shop, I will thank you very much！\n [Admire]"
     # 评价内容
@@ -13,13 +13,15 @@ class Config:
     # 尝试刷新下一步的次数
     try_count = 5
 
-    def __init__(self):
-        pass
-
     @staticmethod
     def get_config_path(config_dir, store_kind, config_type):
         return config_dir + "/" + store_kind + "/" + config_type + ".json"
 
     @staticmethod
     def getDefaultConfigDir():
-        return os.path.expanduser("~") + "/.xgj/miaoWa"
+        return os.path.expanduser("~") + f"/.xgj/miaoWa"
+
+    @staticmethod
+    def getMiaoWaVersion():
+        return Config.version
+

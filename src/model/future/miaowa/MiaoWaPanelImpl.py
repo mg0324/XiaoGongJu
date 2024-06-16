@@ -6,7 +6,6 @@
 # @Author : mango
 import traceback
 import threading
-import logging
 
 from src.model.future.miaowa.MiaoWaPanel import MiaoWaPanel
 from src.model.future.miaowa.MiaoWaService import MiaoWaService
@@ -41,18 +40,12 @@ class MiaoWaPanelImpl(MiaoWaPanel):
 
 
     def setup_logging(self):
-        """
-        Set up logging from configuration file and initialize wxHandler.
-        """
-        # 先加载配置
-        logging.config.fileConfig(Config.getDefaultConfigDir() + '/logging.conf')
-        # 使用配置文件中的Logger
-        logger = logging.getLogger('my_logger')
-
+        # 获取logger
+        logger = LogUtil.getLogger()
         # 初始化并设置WxTextCtrlHandler
         for handler in logger.handlers:
             if isinstance(handler, WxTextCtrlHandler):
-                handler.text_ctrl = self.long_text
+                handler.text_ctrl = self.richTextOutput
 
     def doExecute(self, event):
         storeLabel = self.choiceStore.GetStringSelection()
@@ -69,7 +62,7 @@ class MiaoWaPanelImpl(MiaoWaPanel):
                                                      configDir=configDir, isHeadless=choiceIsHeadless))
         try:
             # 先清理
-            self.long_text.Clear()
+            self.richTextOutput.Clear()
             # 创建主工作线程
             threadMain = threading.Thread(target=self.service.startWorking, args=(subCmd,))
             # 开启任务
@@ -77,5 +70,5 @@ class MiaoWaPanelImpl(MiaoWaPanel):
         except Exception as e:
             traceback.print_exc()
             msg = "程序出错，{} \n".format(e)
-            self.long_text.AppendText(msg)
+            self.richTextOutput.AppendText(msg)
         pass
