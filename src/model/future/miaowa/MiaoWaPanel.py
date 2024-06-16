@@ -93,6 +93,12 @@ class MiaoWaPanel(wx.Panel):
 
         wSizer6.Add(self.radioRaf, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
 
+        self.radioSd = wx.RadioButton(self, wx.ID_ANY, u"SD", wx.DefaultPosition, wx.Size(200, -1), 0)
+        self.radioSd.SetValue(False)
+        self.radioSd.SetToolTip(u"店铺数据保存")
+
+        wSizer6.Add(self.radioSd, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 5)
+
         self.m_staticText161 = wx.StaticText(self, wx.ID_ANY, u"当前页：", wx.DefaultPosition, wx.DefaultSize, 0)
         self.m_staticText161.Wrap(-1)
 

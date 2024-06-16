@@ -14,17 +14,19 @@ from src.model.future.miaowa.MiaoWaService import MiaoWaService
 from src.model.future.miaowa.compontent.Context import Context
 from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.model.future.miaowa.LogHandler import WxTextCtrlHandler
-from src.util.WxUtil import WxUtil
 
 _store = {
     "运动店": {
         "code": "sport"
+    },
+    "运动店2": {
+        "code": "sport2"
     }
 }
 
 
 def getStoreList():
-    return [u"运动店"]
+    return list(_store)
 
 
 def getDefaultConfigDir():
@@ -60,17 +62,20 @@ class MiaoWaPanelImpl(MiaoWaPanel):
         storeLabel = self.choiceStore.GetStringSelection()
         storeCode = _store[storeLabel]["code"]
         page = self.choicePage.GetStringSelection()
-        isRaf = self.radioRaf.GetValue()
+        isSd = self.radioSd.GetValue()
         configDir = self.inputConfig.GetValue()
         choiceIsHeadless = self.choiceIsHeadless.GetStringSelection()
-        LogUtil.info(f'storeLabel:{storeLabel},storeCode:{storeCode},page:{page},isRaf:{isRaf},configDir:{configDir},choiceIsHeadless:{choiceIsHeadless}')
+        subCmd = 'raf'
+        if isSd:
+            subCmd = 'sd'
+        LogUtil.info(f'storeLabel:{storeLabel},storeCode:{storeCode},page:{page},subCmd:{subCmd},configDir:{configDir},choiceIsHeadless:{choiceIsHeadless}')
         self.service = MiaoWaService(context=Context(store=storeCode, page=page,
                                                      configDir=configDir, isHeadless=choiceIsHeadless))
         try:
             # 先清理
             self.long_text.Clear()
             # 创建主工作线程
-            threadMain = threading.Thread(target=self.service.startWorking, args=("raf",))
+            threadMain = threading.Thread(target=self.service.startWorking, args=(subCmd,))
             # 开启任务
             threadMain.start()
         except Exception as e:
