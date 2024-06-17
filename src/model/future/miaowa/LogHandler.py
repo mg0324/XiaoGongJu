@@ -19,5 +19,10 @@ class WxTextCtrlHandler(logging.Handler):
 
     def emit(self, record):
         msg = self.format(record)
-        wx.CallAfter(self.text_ctrl.AppendText, msg + '\n')
+        wx.CallAfter(self.append_text, msg + '\n')
+
+    def append_text(self, msg):
+        self.text_ctrl.WriteText(msg)
+        self.text_ctrl.ShowPosition(self.text_ctrl.GetLastPosition())
         self.flush()
+
