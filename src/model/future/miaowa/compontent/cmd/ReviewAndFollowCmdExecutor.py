@@ -37,11 +37,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
             # 打开详情页
             self.goto_detail(robot, order_number)
             LogUtil.info(prefix + "到详情页")
-            # doFollow
-            #if self.check_work_follow(robot):
             self.do_follow(robot, order_number)
-            # doReview
-            #if self.check_work_review(robot):
             self.do_review(robot, order_number)
         pass
 
@@ -54,7 +50,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         while 1:
             start = time.time()
             try:
-                robot.browser.get_driver().find_element_by_link_text('联系买家').click()
+                robot.browser.get_driver().find_element_by_link_text('Contact').click()
                 LogUtil.debug(prefix + '已点击联系买家链接')
                 end = time.time()
                 break
@@ -105,14 +101,14 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
             start = time.clock()
             count = count + 1
             try:
-                robot.browser.get_driver().find_element_by_link_text('评价').click()
+                robot.browser.get_driver().find_element_by_link_text('Review buyer').click()
                 LogUtil.debug(prefix + '已点击评价按钮')
                 end = time.clock()
                 break
             except:
                 time.sleep(1)
                 LogUtil.debug(prefix + "还未定位到元素!")
-                if count>10:
+                if count > 10:
                     afterFlag = True
                     break
         if afterFlag:
@@ -142,14 +138,3 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         robot.browser.close()
         pass
 
-    # 判断是否有工作任务
-    def check_work_result(self, robot):
-        return robot.argument.get_args().work_follow == 'open' or robot.argument.get_args().work_review == 'open'
-
-    # 检查是否需要执行follow任务
-    def check_work_follow(self, robot):
-        return robot.argument.get_args().work_follow == 'open'
-
-    # 检查是否需要执行review任务
-    def check_work_review(self, robot):
-        return robot.argument.get_args().work_review == 'open'
