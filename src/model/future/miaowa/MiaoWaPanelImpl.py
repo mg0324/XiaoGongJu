@@ -42,6 +42,14 @@ class MiaoWaPanelImpl(MiaoWaPanel):
         self.service = None
         self.setup_logging()
 
+    def choseSd(self, event):
+        self.choicePage.Hide()
+        self.textCurPage.Hide()
+
+    def choseRaf(self, event):
+        self.choicePage.Show()
+        self.textCurPage.Show()
+
 
     def setup_logging(self):
         # 获取logger
@@ -98,3 +106,6 @@ class MiaoWaPanelImpl(MiaoWaPanel):
                 raise NotImplementedError(f"不支持的操作系统: {system}")
         except Exception as e:
             print(f"打开目录时出错: {e}")
+
+    def stopTask(self, event):
+        pass
