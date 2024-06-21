@@ -1,6 +1,7 @@
 # coding=utf-8
 import time
 
+from src.model.future.miaowa.compontent.Config import Config
 from src.model.future.miaowa.compontent.GetTime import GetTime
 from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.model.future.miaowa.compontent.cmd.CmdExecutor import CmdExecutor
@@ -64,6 +65,8 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         })
         # 评论框class
         textareaClass = "im-message-input-input-wrap"
+        count = 1
+        afterFlag = False
         while 1:
             start = time.time()
             try:
@@ -72,9 +75,16 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
                 end = time.time()
                 break
             except:
+                count = count + 1
                 time.sleep(1)
+                if count > Config.try_count:
+                    afterFlag = True
+                    break
                 LogUtil.debug(prefix + textareaClass + "还未定位到元素!")
-
+        if afterFlag:
+            LogUtil.error(prefix + "无法定位到消息框，退出!")
+            robot.browser.close()
+            return 1
         LogUtil.debug(prefix + textareaClass + '定位耗费时间：' + str(end - start))
         # 找到评价框
         textarea = robot.browser.get_driver().find_element_by_css_selector("."+textareaClass+" textarea")
