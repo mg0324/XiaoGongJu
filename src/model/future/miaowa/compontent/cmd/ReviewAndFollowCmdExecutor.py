@@ -47,7 +47,8 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
     def do_follow(self, robot, order_number):
         prefix = "[store=" + robot.store.get_name() + "][" + order_number + "]"
         LogUtil.debug(prefix + "开始处理follow")
-        
+        count = 1
+        afterFlag = False
         while 1:
             start = time.time()
             try:
@@ -56,8 +57,15 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
                 end = time.time()
                 break
             except:
+                count = count + 1
+                if count > Config.try_count:
+                    afterFlag = True
+                    break
                 time.sleep(1)
                 LogUtil.debug(prefix + "还未定位到元素!")
+        if afterFlag:
+            LogUtil.error(prefix + "已过联系时间，不再处理")
+            return 1
         LogUtil.debug(prefix + "定位耗费时间：" + str(end - start))
         robot.browser.switch_window(1)
         robot.browser.get_driver().execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
@@ -118,7 +126,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
             except:
                 time.sleep(1)
                 LogUtil.debug(prefix + "还未定位到元素!")
-                if count > 10:
+                if count > Config.try_count:
                     afterFlag = True
                     break
         if afterFlag:

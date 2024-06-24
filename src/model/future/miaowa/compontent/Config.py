@@ -11,7 +11,7 @@ class Config:
     # 评价内容
     review_msg = "You are a very good buyer, looking forward to your next purchase and hope you follow my shop"
     # 尝试刷新下一步的次数
-    try_count = 5
+    try_count = 10
 
     @staticmethod
     def get_config_path(config_dir, store_kind, config_type):
