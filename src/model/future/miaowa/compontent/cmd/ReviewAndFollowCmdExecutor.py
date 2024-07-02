@@ -32,6 +32,9 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         robot.login_to_home()
         # 2.获取订单列表
         orders = self.fetch_orders(robot)
+        if orders is None:
+            LogUtil.warning("暂无需要处理的订单数据！")
+            pass
         # 3.开始处理订单任务
         for order_number in orders:
             prefix = "[store=" + robot.store.get_name() + "]订单号=" + order_number

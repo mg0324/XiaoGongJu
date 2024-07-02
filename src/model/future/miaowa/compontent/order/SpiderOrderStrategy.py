@@ -1,5 +1,7 @@
 # coding=utf-8
 import time
+
+from src.model.future.miaowa.compontent.Config import Config
 from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.model.future.miaowa.compontent.order.OrderStrategy import OrderStrategy
 
@@ -19,6 +21,8 @@ class SpiderOrderStrategy(OrderStrategy):
         # 打开评价首页
         robot.browser.get(robot.store.review_url+"?page="+robot.context.getPage())
         prefix = "[store="+robot.store.get_name()+"]"
+        count = 1
+        afterFlag = False
         while 1:
             start = time.time()
             try:
@@ -28,7 +32,14 @@ class SpiderOrderStrategy(OrderStrategy):
                 break
             except:
                 time.sleep(1)
+                count = count + 1
                 LogUtil.debug(prefix + "还未定位到买家订单表格[buyer-ordertable]!")
+                if count > Config.try_count:
+                    afterFlag = True
+                    break
+        if afterFlag:
+            LogUtil.debug(prefix + '请检查登陆信息是否失效！')
+            return None
 
         LogUtil.debug(prefix + '定位耗费时间：' + str(end - start))
         # 找到tbody
