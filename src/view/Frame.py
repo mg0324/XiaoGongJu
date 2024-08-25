@@ -25,7 +25,7 @@ class Frame(wx.Frame):
         wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=self.title(), pos=wx.DefaultPosition,
                           size=self.getSize(),
                           style=wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE | wx.MINIMIZE_BOX | wx.TAB_TRAVERSAL
-                                | wx.DEFAULT_FRAME_STYLE | wx.STAY_ON_TOP)
+                                | wx.DEFAULT_FRAME_STYLE)
 
         self.SetSizeHints(wx.DefaultSize, wx.DefaultSize)
 

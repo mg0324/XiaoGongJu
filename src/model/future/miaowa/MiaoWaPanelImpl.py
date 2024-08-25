@@ -9,6 +9,7 @@ import platform
 import subprocess
 import traceback
 import threading
+import wx
 
 from src.model.future.miaowa.MiaoWaPanel import MiaoWaPanel
 from src.model.future.miaowa.MiaoWaService import MiaoWaService
@@ -33,6 +34,11 @@ def getStoreList():
 
 class MiaoWaPanelImpl(MiaoWaPanel):
     service = None
+
+    def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=wx.Size(885, 603), style=wx.TAB_TRAVERSAL,
+                 name=wx.EmptyString):
+        super().__init__(parent, id, pos, size, style, name)
+        self.isTop = False
 
     def init(self):
         self.choiceStore.Set(getStoreList())
@@ -109,3 +115,14 @@ class MiaoWaPanelImpl(MiaoWaPanel):
 
     def stopTask(self, event):
         pass
+
+    def doTop(self, event):
+        frame = self.GetParent().GetParent()
+        if not self.isTop:
+            frame.SetWindowStyle(frame.GetWindowStyle() | wx.STAY_ON_TOP)
+            self.isTop = True
+            LogUtil.info("设置窗口top成功")
+        else:
+            frame.SetWindowStyle(frame.GetWindowStyle() & ~wx.STAY_ON_TOP)
+            self.isTop = False
+            LogUtil.info("取消窗口top成功")

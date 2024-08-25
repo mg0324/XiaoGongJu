@@ -133,6 +133,9 @@ class MiaoWaPanel(wx.Panel):
         self.btnStop = wx.Button(self, wx.ID_ANY, u"停止任务", wx.DefaultPosition, wx.DefaultSize, 0)
         wSizer8.Add(self.btnStop, 0, wx.ALL, 5)
 
+        self.btnTop = wx.Button(self, wx.ID_ANY, u"窗口置顶", wx.DefaultPosition, wx.DefaultSize, 0)
+        wSizer8.Add(self.btnTop, 0, wx.ALL, 5)
+
         bSizer12.Add(wSizer8, 1, wx.EXPAND, 5)
 
         self.SetSizer(bSizer12)
@@ -144,6 +147,7 @@ class MiaoWaPanel(wx.Panel):
         self.radioSd.Bind(wx.EVT_RADIOBUTTON, self.choseSd)
         self.btnMain.Bind(wx.EVT_BUTTON, self.doExecute)
         self.btnStop.Bind(wx.EVT_BUTTON, self.stopTask)
+        self.btnTop.Bind(wx.EVT_BUTTON, self.doTop)
         self.init()
 
     def __del__(self):
@@ -163,4 +167,7 @@ class MiaoWaPanel(wx.Panel):
         event.Skip()
 
     def stopTask(self, event):
+        event.Skip()
+
+    def doTop(self, event):
         event.Skip()
