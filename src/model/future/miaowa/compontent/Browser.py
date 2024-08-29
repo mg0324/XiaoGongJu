@@ -1,8 +1,19 @@
 # coding=utf-8
+import sys
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from src.model.future.miaowa.compontent.GetTime import GetTime
 
+
+def getChromedriverPath():
+    if getattr(sys, 'frozen', False):
+        # 如果应用是打包的
+        chromedriver_path = os.path.join(sys._MEIPASS, "chromedriver")
+    else:
+        # 如果应用是在开发环境下运行
+        chromedriver_path = "/usr/local/bin/chromedriver"
+    return chromedriver_path
 
 # 创建谷歌浏览器
 def new_chrome(argument):
@@ -29,7 +40,7 @@ def new_chrome(argument):
     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     chrome_options.add_argument('--incognito')  # 无痕模式
     # browser = webdriver.PhantomJS()
-    browser = webdriver.Chrome(options=chrome_options)
+    browser = webdriver.Chrome(options=chrome_options, executable_path=getChromedriverPath())
     # 需要设置浏览器的window.navigator.webdriver=undefined，不然无法通过滑块检查（速卖通加了webdriver禁止）
     # https://blog.csdn.net/weixin_43881394/article/details/108467118?spm=1005.2026.3001.5635&utm_medium=distribute.pc_relevant_ask_down.none-task-blog-2~default~OPENSEARCH~Rate-5.pc_feed_download_top3ask&depth_1-utm_source=distribute.pc_relevant_ask_down.none-task-blog-2~default~OPENSEARCH~Rate-5.pc_feed_download_top3ask
     # browser.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
