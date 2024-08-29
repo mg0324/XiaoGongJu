@@ -26,14 +26,14 @@ class StoreDataCmdExecutor(CmdExecutor):
         robot.browser.get(self.getStoreUrl(sk))
         count = 0
         while 1:
-            start = time.clock()
+            start = time.perf_counter()
             count = count + 1
             try:
                 follower = robot.browser.get_driver().find_element_by_css_selector('#hd > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(2) > div > div:nth-child(3) > div:nth-child(1) > span:nth-child(1)').text.rstrip()
                 score = robot.browser.get_driver().find_element_by_css_selector(
                     '#hd > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(2) > div > a > p').text.split(
                     " ")[0]
-                end = time.clock()
+                end = time.perf_counter()
                 LogUtil.debug(f'第{count}次找到follower数据，耗时{end-start}ms')
                 break
             except:

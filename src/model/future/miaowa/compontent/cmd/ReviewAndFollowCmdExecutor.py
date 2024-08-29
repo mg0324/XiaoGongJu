@@ -119,12 +119,12 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         count = 1
         afterFlag = False
         while 1:
-            start = time.clock()
+            start = time.perf_counter()
             count = count + 1
             try:
                 robot.browser.get_driver().find_element_by_link_text('Review buyer').click()
                 LogUtil.debug(prefix + '已点击评价按钮')
-                end = time.clock()
+                end = time.perf_counter()
                 break
             except:
                 time.sleep(1)
@@ -140,11 +140,11 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
 
         robot.browser.switch_window(1)
         while 1:
-            start = time.clock()
+            start = time.perf_counter()
             try:
                 robot.browser.get_driver().find_element_by_xpath('//*[@id="the-ratings"]/div/div[3]/span[5]').click()
                 LogUtil.debug(prefix + '已点击5星')
-                end = time.clock()
+                end = time.perf_counter()
                 break
             except:
                 time.sleep(1)
