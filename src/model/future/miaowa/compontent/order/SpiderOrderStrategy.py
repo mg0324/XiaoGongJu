@@ -24,11 +24,11 @@ class SpiderOrderStrategy(OrderStrategy):
         count = 1
         afterFlag = False
         while 1:
-            start = time.time()
+            start = time.perf_counter()
             try:
                 order_table = robot.browser.get_driver().find_element_by_id("buyer-ordertable")
                 LogUtil.debug(prefix + '已定位到买家订单表格[buyer-ordertable]')
-                end = time.time()
+                end = time.perf_counter()
                 break
             except:
                 time.sleep(1)

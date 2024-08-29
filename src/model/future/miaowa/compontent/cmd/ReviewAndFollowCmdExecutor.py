@@ -53,11 +53,11 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         count = 1
         afterFlag = False
         while 1:
-            start = time.time()
+            start = time.perf_counter()
             try:
                 robot.browser.get_driver().find_element_by_link_text('Contact').click()
                 LogUtil.debug(prefix + '已点击联系买家链接')
-                end = time.time()
+                end = time.perf_counter()
                 break
             except:
                 count = count + 1
@@ -79,11 +79,11 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         count = 1
         afterFlag = False
         while 1:
-            start = time.time()
+            start = time.perf_counter()
             try:
                 robot.browser.get_driver().find_element_by_class_name(textareaClass)
                 LogUtil.debug(prefix + textareaClass + '已定位到元素')
-                end = time.time()
+                end = time.perf_counter()
                 break
             except:
                 count = count + 1

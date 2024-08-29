@@ -17,9 +17,9 @@ def showtime(stage):
     def doit(func):
         @wraps(func)
         def inner(*args, **kwarg):
-            s1 = time.time()
+            s1 = time.perf_counter()
             res = func(*args, **kwarg)
-            e1 = time.time()
+            e1 = time.perf_counter()
             prefix = ""
             if len(stage) > 0:
                 prefix = "[" + stage + "]"
