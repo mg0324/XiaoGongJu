@@ -9,7 +9,7 @@ from src.model.future.miaowa.compontent.order.OrderStrategy import OrderStrategy
 # 从star view中获取星值 0-0星，20-一星，40-二星，60-三星，80-4星，100-5星
 def get_star_from_star_view(element):
     style = element.find_element_by_css_selector("span").get_attribute("style")
-    return int(style.replace("width:", "").replace("%;",""))
+    return int(style.replace("width:", "").replace("%;", ""))
 
 
 # 爬虫

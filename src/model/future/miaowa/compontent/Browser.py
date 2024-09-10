@@ -15,6 +15,7 @@ def getChromedriverPath():
         chromedriver_path = "/usr/local/bin/chromedriver"
     return chromedriver_path
 
+
 # 创建谷歌浏览器
 def new_chrome(argument):
     # 浏览器参数优化
