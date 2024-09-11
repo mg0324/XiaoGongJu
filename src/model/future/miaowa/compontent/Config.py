@@ -5,12 +5,6 @@ import json
 
 
 class Config:
-    # 系统版本
-    version = "1.2.2-20240829"
-    # follow消息
-    follow_msg = "Dear friend, \n Please follow my shop, I will thank you very much！\n [Admire]"
-    # 评价内容
-    review_msg = "You are a very good buyer, looking forward to your next purchase and hope you follow my shop"
     # 尝试刷新下一步的次数
     try_count = 10
 
@@ -24,7 +18,7 @@ class Config:
 
     @staticmethod
     def getMiaoWaVersion():
-        return Config.version
+        return Config.getMiaoWaConfig()["version"]
 
     @staticmethod
     def getMiaoWaConfig():
@@ -33,5 +27,25 @@ class Config:
         return data
 
     @staticmethod
+    def getCanReviewDays():
+        return Config.getMiaoWaConfig()["review"]["days"]
+
+    @staticmethod
+    def getCanReviewScore():
+        return Config.getMiaoWaConfig()["review"]["score"]
+
+    @staticmethod
     def getMiaoWaStoreList():
         return Config.getMiaoWaConfig()["stores"]
+
+    @staticmethod
+    def getFollowMsg():
+        return Config.getMiaoWaConfig()["followMsg"]
+
+    @staticmethod
+    def getReviewMsg():
+        return Config.getMiaoWaConfig()["reviewMsg"]
+
+    @staticmethod
+    def getTryCount():
+        return Config.getMiaoWaConfig()["tryCount"]

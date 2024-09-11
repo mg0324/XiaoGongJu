@@ -50,7 +50,7 @@ class SpiderOrderStrategy(OrderStrategy):
                 time.sleep(1)
                 count = count + 1
                 LogUtil.debug(prefix + "还未定位到买家订单表格[buyer-ordertable]!")
-                if count > Config.try_count:
+                if count > Config.getTryCount():
                     afterFlag = True
                     break
         if afterFlag:
@@ -73,7 +73,7 @@ class SpiderOrderStrategy(OrderStrategy):
                 + ",close_date_str=" + close_date_str)
             close_date = datetime.strptime(close_date_str, "%Y.%m.%d %H:%M")
             # 4星以上是好评，且自己没有评过分
-            if buyer_star >= 80 and my_star == 0 and is_in_days(close_date, Config.getMiaoWaConfig()["review_days"]):
+            if buyer_star >= Config.getCanReviewScore() and my_star == 0 and is_in_days(close_date, Config.getCanReviewDays()):
                 self.order_list.append(order_number)
                 LogUtil.info(prefix + "添加可raf订单：" + order_number)
         return self.order_list

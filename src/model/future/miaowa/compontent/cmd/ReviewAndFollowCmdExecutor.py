@@ -61,7 +61,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
                 break
             except:
                 count = count + 1
-                if count > Config.try_count:
+                if count > Config.getTryCount():
                     afterFlag = True
                     break
                 time.sleep(1)
@@ -88,7 +88,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
             except:
                 count = count + 1
                 time.sleep(1)
-                if count > Config.try_count:
+                if count > Config.getTryCount():
                     afterFlag = True
                     break
                 LogUtil.debug(prefix + textareaClass + "还未定位到元素!")
@@ -99,7 +99,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
         LogUtil.debug(prefix + textareaClass + '定位耗费时间：' + str(end - start))
         # 找到评价框
         textarea = robot.browser.get_driver().find_element_by_css_selector("."+textareaClass+" textarea")
-        textarea.send_keys(robot.config.follow_msg)
+        textarea.send_keys(Config.getFollowMsg())
         time.sleep(1)
         js = "var q=document.querySelector('#root > div:nth-child(3) > div > div.csp-im_im-message-content > div > div > div.csp-im_message-container > div > div.im-message-box-addon-after > div > div > footer > div.im-message-input-footer-right > a > i > svg').parentElement.click()"
         # robot.browser.get_driver().execute_script(js)
@@ -129,7 +129,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
             except:
                 time.sleep(1)
                 LogUtil.debug(prefix + "还未定位到元素!")
-                if count > Config.try_count:
+                if count > Config.getTryCount():
                     afterFlag = True
                     break
         if afterFlag:
@@ -152,7 +152,7 @@ class ReviewAndFollowCmdExecutor(CmdExecutor):
 
         LogUtil.debug(prefix + '定位耗费时间：' + str(end - start))
         # 评价内容
-        robot.browser.get_driver().find_element_by_id('the-form-message').send_keys(robot.config.review_msg)
+        robot.browser.get_driver().find_element_by_id('the-form-message').send_keys(Config.getReviewMsg())
         # 点击评价
         robot.browser.get_driver().find_element_by_id('feedback-submit-button').click()
         # 关闭
