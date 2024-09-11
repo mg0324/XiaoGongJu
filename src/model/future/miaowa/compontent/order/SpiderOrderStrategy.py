@@ -1,5 +1,6 @@
 # coding=utf-8
 import time
+from datetime import datetime, timedelta
 
 from src.model.future.miaowa.compontent.Config import Config
 from src.model.future.miaowa.compontent.LogUtil import LogUtil
@@ -10,6 +11,21 @@ from src.model.future.miaowa.compontent.order.OrderStrategy import OrderStrategy
 def get_star_from_star_view(element):
     style = element.find_element_by_css_selector("span").get_attribute("style")
     return int(style.replace("width:", "").replace("%;", ""))
+
+
+# 判断是否在指定天数内
+def is_in_days(close_date, days):
+    # 获取当前时间
+    current_time = datetime.now()
+
+    # 计算当前时间和输入时间的差异
+    time_difference = current_time - close_date
+
+    # 判断是否在一个月内（假设一个月为30天）
+    if abs(time_difference) <= timedelta(days=days):
+        return True
+    else:
+        return False
 
 
 # 爬虫
@@ -49,11 +65,16 @@ class SpiderOrderStrategy(OrderStrategy):
             order_number = tbody.find_element_by_class_name("order-head").find_element_by_class_name("info-body").text
             feedback = tbody.find_element_by_class_name("product-feedback")
             views = feedback.find_elements_by_class_name("star-view")
+            # 订单关闭时间
+            close_date_str = tbody.find_element_by_class_name("order-complayDate").find_element_by_class_name("info-body").text
             my_star = get_star_from_star_view(views[0])
             buyer_star = get_star_from_star_view(views[1])
+            LogUtil.debug(prefix + "order_number=" + order_number + ",my_star=" + str(my_star) + ",buyer_star=" + str(buyer_star)
+                + ",close_date_str=" + close_date_str)
+            close_date = datetime.strptime(close_date_str, "%Y.%m.%d %H:%M")
             # 4星以上是好评，且自己没有评过分
-            if buyer_star >= 80 and my_star == 0:
+            if buyer_star >= 80 and my_star == 0 and is_in_days(close_date, Config.getMiaoWaConfig()["review_days"]):
                 self.order_list.append(order_number)
-                LogUtil.debug(prefix + "order_number="+order_number+",my_star="+str(my_star)+",buyer_star="+str(buyer_star))
+                LogUtil.info(prefix + "添加可raf订单：" + order_number)
         return self.order_list
 

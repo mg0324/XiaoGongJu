@@ -18,18 +18,9 @@ from src.model.future.miaowa.compontent.Context import Context
 from src.model.future.miaowa.compontent.LogUtil import LogUtil
 from src.model.future.miaowa.LogHandler import WxTextCtrlHandler
 
-_store = {
-    "运动店": {
-        "code": "sport"
-    },
-    "运动店2": {
-        "code": "sport2"
-    }
-}
-
 
 def getStoreList():
-    return list(_store)
+    return list(Config.getMiaoWaStoreList())
 
 
 class MiaoWaPanelImpl(MiaoWaPanel):
@@ -67,7 +58,7 @@ class MiaoWaPanelImpl(MiaoWaPanel):
 
     def doExecute(self, event):
         storeLabel = self.choiceStore.GetStringSelection()
-        storeCode = _store[storeLabel]["code"]
+        storeCode = Config.getMiaoWaStoreList()[storeLabel]["code"]
         page = self.choicePage.GetStringSelection()
         isSd = self.radioSd.GetValue()
         configDir = self.inputConfig.GetValue()

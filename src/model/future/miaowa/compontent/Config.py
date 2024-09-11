@@ -1,6 +1,7 @@
 # coding=utf-8
 # 配置类
 import os
+import json
 
 
 class Config:
@@ -25,3 +26,12 @@ class Config:
     def getMiaoWaVersion():
         return Config.version
 
+    @staticmethod
+    def getMiaoWaConfig():
+        with open(Config.getDefaultConfigDir() + "/config.json", 'r', encoding='utf-8') as file:
+            data = json.load(file)
+        return data
+
+    @staticmethod
+    def getMiaoWaStoreList():
+        return Config.getMiaoWaConfig()["stores"]
