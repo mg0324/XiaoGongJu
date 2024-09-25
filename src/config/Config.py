@@ -9,7 +9,7 @@
 # 配置类
 class Config:
     # 系统版本
-    __version = "1.1.0"
+    __version = "1.3.0"
     # 日志级别
     log_level = "debug"
     # 窗体大小
