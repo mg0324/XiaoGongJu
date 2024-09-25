@@ -13,7 +13,7 @@ class Config:
     # 日志级别
     log_level = "debug"
     # 窗体大小
-    windowSize = (1200, 800)
+    windowSize = (1400, 800)
     # 关于
     about = {
         "name": "小工具",

@@ -13,7 +13,7 @@ class WxTextCtrlHandler(logging.Handler):
     """
     A custom logging handler that sends logs to a wx.TextCtrl.
     """
-    def __init__(self, text_ctrl):
+    def __init__(self, text_ctrl=None):
         super().__init__()
         self.text_ctrl = text_ctrl
 

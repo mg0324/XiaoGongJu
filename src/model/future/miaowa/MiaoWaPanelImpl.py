@@ -20,7 +20,7 @@ from src.model.future.miaowa.LogHandler import WxTextCtrlHandler
 
 
 def getStoreList():
-    return list(Config.getMiaoWaStoreList())
+    return list(Config.get_miao_wa_store_list())
 
 
 class MiaoWaPanelImpl(MiaoWaPanel):
@@ -34,8 +34,8 @@ class MiaoWaPanelImpl(MiaoWaPanel):
     def init(self):
         self.choiceStore.Set(getStoreList())
         self.choicePage.Set([str(x) for x in range(1, 10)])
-        self.inputConfig.SetValue(Config.getDefaultConfigDir())
-        self.textVersion.SetLabel(f"V{Config.getMiaoWaVersion()}")
+        self.inputConfig.SetValue(Config.get_default_config_dir())
+        self.textVersion.SetLabel(f"V{Config.get_miao_wa_version()}")
         self.service = None
         self.setup_logging()
 
@@ -58,7 +58,7 @@ class MiaoWaPanelImpl(MiaoWaPanel):
 
     def doExecute(self, event):
         storeLabel = self.choiceStore.GetStringSelection()
-        storeCode = Config.getMiaoWaStoreList()[storeLabel]["code"]
+        storeCode = Config.get_miao_wa_store_list()[storeLabel]["code"]
         page = self.choicePage.GetStringSelection()
         isSd = self.radioSd.GetValue()
         configDir = self.inputConfig.GetValue()
@@ -84,7 +84,7 @@ class MiaoWaPanelImpl(MiaoWaPanel):
 
 
     def openDir(self, event):
-        path = Config.getDefaultConfigDir()
+        path = Config.get_default_config_dir()
         # 确保路径存在
         if not os.path.isdir(path):
             raise NotADirectoryError(f"{path} 不是一个有效的目录")

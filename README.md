@@ -23,6 +23,10 @@
 ``` shell
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
+如果出现报错，可以执行下如下语句，确保python工具集正常。
+``` shell
+python -m pip install --upgrade pip setuptools wheel -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
 
 ## 架构设计
 利用4+1视图展现，主要关注用例图和类图。
@@ -40,6 +44,10 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 * app-miao-wa.py - wxPython的app入口
 * dist - 打包后的代码
 * doc - 文档
+* miaowa - 妙娃配置目录
+  * config.json - 主配置
+  * logging.conf - 日志配置
+  * sport/sport2 - 子店铺配置，下面可以放cookies.json
 
 ## 打包发布
 ``` shell

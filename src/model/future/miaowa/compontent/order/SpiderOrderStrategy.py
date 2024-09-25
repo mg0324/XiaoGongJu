@@ -1,5 +1,6 @@
 # coding=utf-8
 import time
+import locale
 from datetime import datetime, timedelta
 
 from src.model.future.miaowa.compontent.Config import Config
@@ -50,7 +51,7 @@ class SpiderOrderStrategy(OrderStrategy):
                 time.sleep(1)
                 count = count + 1
                 LogUtil.debug(prefix + "还未定位到买家订单表格[buyer-ordertable]!")
-                if count > Config.getTryCount():
+                if count > Config.get_try_count():
                     afterFlag = True
                     break
         if afterFlag:
@@ -71,9 +72,10 @@ class SpiderOrderStrategy(OrderStrategy):
             buyer_star = get_star_from_star_view(views[1])
             LogUtil.debug(prefix + "order_number=" + order_number + ",my_star=" + str(my_star) + ",buyer_star=" + str(buyer_star)
                 + ",close_date_str=" + close_date_str)
+            locale.setlocale(locale.LC_ALL, 'zh_CN.UTF-8')
             close_date = datetime.strptime(close_date_str, "%Y.%m.%d %H:%M")
             # 4星以上是好评，且自己没有评过分
-            if buyer_star >= Config.getCanReviewScore() and my_star == 0 and is_in_days(close_date, Config.getCanReviewDays()):
+            if buyer_star >= Config.get_can_review_score() and my_star == 0 and is_in_days(close_date, Config.get_can_review_days()):
                 self.order_list.append(order_number)
                 LogUtil.info(prefix + "添加可raf订单：" + order_number)
         return self.order_list
