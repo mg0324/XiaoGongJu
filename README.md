@@ -50,9 +50,16 @@ python -m pip install --upgrade pip setuptools wheel -i https://pypi.tuna.tsingh
   * sport/sport2 - 子店铺配置，下面可以放cookies.json
 
 ## 打包发布
+### mac上打包
 ``` shell
-pip install pyinstaller
+pip install pyinstaller -i https://pypi.tuna.tsinghua.edu.cn/simple
 pyinstaller -F -w -i='logo.ico' --add-binary "/usr/local/bin/chromedriver:./" app-miao-wa.py
+```
+
+### windows上打包
+``` shell
+pip install pyinstaller -i https://pypi.tuna.tsinghua.edu.cn/simple
+pyinstaller -F -w -i='logo.ico' --add-binary "D:/env/bin/chromedriver.exe;./" app-miao-wa.py
 ```
 
 ## 界面展示
